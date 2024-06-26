@@ -1,0 +1,14 @@
+# ignore compiled file
+__pycache__/
+*.pyc
+**/__pycache__/
+
+# notebook checkpoints
+**/.ipynb_checkpoints/
+
+# datasets
+/data/processed/
+/data/raw/
+
+# models
+/models/siamese/
