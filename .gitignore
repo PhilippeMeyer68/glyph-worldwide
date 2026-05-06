@@ -3,12 +3,13 @@ __pycache__/
 *.pyc
 **/__pycache__/
 
-# notebook checkpoints
-**/.ipynb_checkpoints/
+# ignore egg-info
+*.egg-info
 
-# datasets
-/data/processed/
-/data/raw/
+# data files
+data/raw/*
+data/processed/*
+models/*
 
-# models
-/models/siamese/
+# ignore old files
+**/old/ 
