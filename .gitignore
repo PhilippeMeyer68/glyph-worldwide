@@ -6,10 +6,21 @@ __pycache__/
 # ignore egg-info
 *.egg-info
 
-# data files
-data/raw/*
-data/processed/*
-models/*
+# data, models and outputs (data and models are archived on Zenodo)
+/data/
+/models/
+/results/
 
 # ignore old files
-**/old/ 
+**/old/
+
+# run logs and local archives
+/logs/
+/_archive_non_regenerable/
+
+# exploratory notebooks (not part of the pipeline)
+/notebooks/
+**/.ipynb_checkpoints/
+
+# crash dumps
+*.stackdump
