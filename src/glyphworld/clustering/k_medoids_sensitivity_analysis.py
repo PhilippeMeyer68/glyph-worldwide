@@ -2,7 +2,7 @@
 """
 Sensitivity analysis for large-script k-medoids representative glyphs.
 
-Spyder-friendly version.
+Settings are defined in the CONFIG block below.
 No predefined number of clusters.
 Only evaluates stability at the script-distance level.
 
@@ -23,7 +23,6 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from scipy.spatial.distance import squareform
 from scipy.stats import pearsonr, spearmanr
 
 from glyphworld.core.paths import ALPHABETS_DIR, RESULTS_DIR
@@ -377,6 +376,11 @@ def pairwise_run_comparisons(vectors: dict[str, np.ndarray]) -> pd.DataFrame:
 def plot_summary(summary: pd.DataFrame, out_dir: Path) -> None:
     plots_dir = out_dir / "plots"
 
+    # The reference run is compared with itself (rho = 1, MAE = 0); keep it
+    # out of the per-k statistics so it does not bias the k = 100 point.
+    reference_id = f"k{REFERENCE_K}_seed{REFERENCE_SEED}"
+    summary = summary[summary["run_id"] != reference_id]
+
     grouped = summary.groupby("k", as_index=False).agg(
         pearson_mean=("pearson_vs_reference", "mean"),
         pearson_std=("pearson_vs_reference", "std"),
@@ -494,7 +498,7 @@ def plot_distance_scatter(
 
 
 # =============================================================================
-# CONFIG — edit here in Spyder
+# CONFIG
 # =============================================================================
 
 INPUT_EMBEDDINGS = ALPHABETS_DIR / "alphabets_unicode_embeddings_css.pkl"
@@ -644,5 +648,6 @@ def main() -> None:
     print(summary.to_string(index=False))
 
 
-# In Spyder: edit CONFIG, then press Run.
-main()
+# Edit CONFIG above, then run the module.
+if __name__ == "__main__":
+    main()
