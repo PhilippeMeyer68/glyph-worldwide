@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import annotations
-
 """
 Paper figure: real glyphs + synthetic script pairs.
 
@@ -18,6 +16,8 @@ Outputs:
     RESULTS_DIR / "validation" / "real_and_synthetic_glyph_examples.png"
     RESULTS_DIR / "validation" / "real_and_synthetic_glyph_examples.pdf"
 """
+
+from __future__ import annotations
 
 import argparse
 import pickle

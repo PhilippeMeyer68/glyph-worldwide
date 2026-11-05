@@ -1,6 +1,9 @@
+"""
+Export the script metadata table (locations, time ranges, sizes) as a LaTeX longtable.
+"""
+
 import math
 import warnings
-from pathlib import Path
 
 import pandas as pd
 

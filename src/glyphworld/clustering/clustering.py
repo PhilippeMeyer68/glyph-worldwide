@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import annotations
-
 """
 Worldwide script clustering pipeline.
 
@@ -12,6 +10,8 @@ It exports all paper/reproducibility outputs:
 RESULTS_DIR / "worldwide_clustering"
     - radial_dendrogram.pdf
     - rectangular_dendrogram.png
+    - mds_2d.png
+    - mds_2d_coordinates.csv
     - clusters.csv
     - clusters.xlsx
     - cluster_members.csv
@@ -32,6 +32,8 @@ Use:
     python clustering.py
 """
 
+from __future__ import annotations
+
 import json
 import pickle
 from pathlib import Path
@@ -50,6 +52,7 @@ from scipy.cluster.hierarchy import (
 )
 from scipy.spatial.distance import squareform
 from sklearn.metrics import silhouette_score
+from sklearn.manifold import MDS
 
 from glyphworld.core.paths import PROCESSED_DIR, RESULTS_DIR
 from glyphworld.visualization import radial_tree
@@ -72,11 +75,16 @@ SAVE_RECTANGULAR = True
 
 RADIAL_OUT = OUTPUT_DIR / "radial_dendrogram.pdf"
 RECTANGULAR_OUT = OUTPUT_DIR / "rectangular_dendrogram.png"
+MDS_OUT = OUTPUT_DIR / "mds_2d.png"
 
 K_MIN = 2
 K_MAX = None  # None = number of scripts - 1
 
 FIG_DPI = 300
+
+MDS_RANDOM_STATE = 42
+MDS_MAX_ITER = 3000
+MDS_EPS = 1e-9
 
 
 # =====================================================================
@@ -551,6 +559,88 @@ def compute_leaf_order(dend: dict, labels: list[str], clusters: np.ndarray) -> p
 
 
 # =====================================================================
+# 2D MDS projection
+# =====================================================================
+
+def compute_mds_2d(
+    labels: list[str],
+    D: np.ndarray,
+    clusters: np.ndarray,
+    random_state: int = MDS_RANDOM_STATE,
+) -> pd.DataFrame:
+    """
+    Compute a two-dimensional metric MDS embedding from a precomputed
+    script distance matrix.
+    """
+    mds = MDS(
+        n_components=2,
+        metric=True,
+        dissimilarity="precomputed",
+        random_state=random_state,
+        max_iter=MDS_MAX_ITER,
+        eps=MDS_EPS,
+        n_init=8,
+    )
+
+    coords = mds.fit_transform(D)
+
+    return pd.DataFrame(
+        {
+            "Script": labels,
+            "Cluster": clusters.astype(int),
+            "MDS1": coords[:, 0],
+            "MDS2": coords[:, 1],
+            "MDSStress": float(mds.stress_),
+        }
+    )
+
+
+def plot_mds_2d(
+    mds_df: pd.DataFrame,
+    save_path: Path,
+    show: bool = False,
+) -> None:
+    fig, ax = plt.subplots(figsize=(12, 10))
+
+    scatter = ax.scatter(
+        mds_df["MDS1"],
+        mds_df["MDS2"],
+        c=mds_df["Cluster"],
+        cmap="tab20",
+        s=70,
+        alpha=0.85,
+        edgecolors="black",
+        linewidths=0.3,
+    )
+
+    for _, row in mds_df.iterrows():
+        ax.annotate(
+            row["Script"],
+            xy=(row["MDS1"], row["MDS2"]),
+            xytext=(3, 3),
+            textcoords="offset points",
+            fontsize=7,
+            alpha=0.9,
+        )
+
+    ax.set_xlabel("MDS dimension 1")
+    ax.set_ylabel("MDS dimension 2")
+    ax.set_title("2D MDS projection of script distances")
+    ax.grid(True, alpha=0.25)
+    ax.set_aspect("equal", adjustable="datalim")
+
+    cbar = fig.colorbar(scatter, ax=ax, shrink=0.75)
+    cbar.set_label("Cluster")
+
+    fig.savefig(save_path, dpi=FIG_DPI, bbox_inches="tight")
+
+    if show:
+        plt.show()
+    else:
+        plt.close(fig)
+
+
+# =====================================================================
 # Plot metrics
 # =====================================================================
 
@@ -687,6 +777,12 @@ def main() -> None:
 
     leaf_order_df = compute_leaf_order(dend, alphabets, clusters)
 
+    # -----------------------------------------------------------------
+    # 2D MDS projection
+    # -----------------------------------------------------------------
+    mds_df = compute_mds_2d(alphabets, D_export, clusters)
+    plot_mds_2d(mds_df, save_path=MDS_OUT, show=SHOW_PLOTS)
+
     root, _nodes = to_tree(Z, rd=True)
     dendrogram_text = tree_to_text(root, alphabets)
 
@@ -748,6 +844,7 @@ def main() -> None:
     cluster_members_df.to_csv(OUTPUT_DIR / "cluster_members.csv", index=False)
     medoids_df.to_csv(OUTPUT_DIR / "medoids.csv", index=False)
     leaf_order_df.to_csv(OUTPUT_DIR / "dendrogram_leaf_order.csv", index=False)
+    mds_df.to_csv(OUTPUT_DIR / "mds_2d_coordinates.csv", index=False)
 
     # Distance / linkage outputs
     np.save(OUTPUT_DIR / "condensed_distances.npy", condensed)
@@ -803,6 +900,8 @@ def main() -> None:
         "Exported files:",
         "  - radial_dendrogram.pdf",
         "  - rectangular_dendrogram.png",
+        "  - mds_2d.png",
+        "  - mds_2d_coordinates.csv",
         "  - clusters.csv",
         "  - clusters.xlsx",
         "  - cluster_members.csv",
@@ -831,6 +930,7 @@ def main() -> None:
     print("\n--- Clustering complete ---")
     print(f"Chosen k: {K}")
     print(f"CCC: {ccc:.4f}")
+    print(f"MDS stress: {mds_df['MDSStress'].iloc[0]:.4f}")
     print(f"Sackin normalized: {S_norm:.4f}")
     print(f"Colless normalized: {C_norm:.4f}")
     print(f"All results exported to: {OUTPUT_DIR}")

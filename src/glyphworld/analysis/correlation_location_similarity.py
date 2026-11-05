@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import annotations
-
 """
 Correlate geographic / temporal distances with script visual distance.
 
@@ -9,7 +7,7 @@ predictors of learned visual script distance/similarity, using in-sample and
 K-fold cross-validated correlation.
 
 It exports results in the same style as metric_validation.py and
-clustering_validation.py:
+synthetic_clustering_validation.py:
 
 Outputs
 -------
@@ -33,6 +31,8 @@ Optional CLI:
     python correlation_location_similarity.py --metric spearman
     python correlation_location_similarity.py --metric pearson --k-folds 5
 """
+
+from __future__ import annotations
 
 import argparse
 import json

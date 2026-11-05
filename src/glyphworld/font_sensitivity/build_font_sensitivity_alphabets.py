@@ -1,3 +1,7 @@
+"""
+Render the font-sensitivity scripts with alternative Noto fonts (Sans, Serif, Serif Italic).
+"""
+
 from __future__ import annotations
 
 import pickle

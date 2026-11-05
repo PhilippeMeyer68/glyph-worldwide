@@ -1,3 +1,7 @@
+"""
+Generate the two synthetic benchmarks (metric selection and clustering validation).
+"""
+
 from __future__ import annotations
 
 import random

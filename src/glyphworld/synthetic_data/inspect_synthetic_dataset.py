@@ -1,3 +1,7 @@
+"""
+Summary statistics and plots of the synthetic benchmarks.
+"""
+
 from __future__ import annotations
 
 import json

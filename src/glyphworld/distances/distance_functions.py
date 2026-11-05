@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-In this script we define the siamese-based distance between writing systems.
+Script-level distance between writing systems: symmetric nearest-neighbour mean of glyph distances.
 """
 
 # packages

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This script permits to create alphabets from ttf font files and unicodes.
+Render the glyphs of every alphabet from ttf font files and Unicode ranges.
 """
 
 
@@ -12,7 +12,7 @@ from skimage.morphology import skeletonize
 import glyphworld.data.alphabet_unicode as alphabet_unicode
 from glyphworld.core.paths import ROOT, ALPHABETS_DIR, DATA_DIR
 from glyphworld.core.utils import save_glyph_dictionary
-from glyphworld.visualization.plot_utils import plot_a_glyph, plot_an_alphabet
+from glyphworld.visualization.plot_utils import plot_an_alphabet
 
 
 def estimate_stroke_width(img):
@@ -169,32 +169,31 @@ if __name__ == "__main__":
         image_unsupported,
     )
     plot_an_alphabet(alphabet_glyphs)
-    
-    if 1 == 1:
-        # We export all the alphabets as a single pickle dictionary.
-        alphabets_dic = {}
-        
-        for alphabet in alphabet_unicode_map:
-            print(f"{alphabet}: {len(alphabet_unicode_map[alphabet][0])}")
-            alphabet_glyphs = create_alphabet(
-                ROOT,
-                alphabet_unicode_map,
-                alphabet,
-                xsize,
-                ysize,
-                fontsize,
-                image_unsupported,
-            )
-            glyph_dict = {}
-            unicode_codes = alphabet_unicode_map[alphabet][0]
-    
-            for idx, (img, code) in enumerate(zip(alphabet_glyphs, unicode_codes)):
-                key = f"glyph_{idx:05d}_unicode_{code:05X}"
-                glyph_dict[key] = img
-    
-            alphabets_dic[alphabet] = glyph_dict
 
-        # save
-        save_path = ALPHABETS_DIR / "alphabets_unicode.pkl"
-        save_glyph_dictionary(alphabets_dic, save_path)
-        print(f"[SAVED] {save_path}")
+    # We export all the alphabets as a single pickle dictionary.
+    alphabets_dic = {}
+
+    for alphabet in alphabet_unicode_map:
+        print(f"{alphabet}: {len(alphabet_unicode_map[alphabet][0])}")
+        alphabet_glyphs = create_alphabet(
+            ROOT,
+            alphabet_unicode_map,
+            alphabet,
+            xsize,
+            ysize,
+            fontsize,
+            image_unsupported,
+        )
+        glyph_dict = {}
+        unicode_codes = alphabet_unicode_map[alphabet][0]
+
+        for idx, (img, code) in enumerate(zip(alphabet_glyphs, unicode_codes)):
+            key = f"glyph_{idx:05d}_unicode_{code:05X}"
+            glyph_dict[key] = img
+
+        alphabets_dic[alphabet] = glyph_dict
+
+    # save
+    save_path = ALPHABETS_DIR / "alphabets_unicode.pkl"
+    save_glyph_dictionary(alphabets_dic, save_path)
+    print(f"[SAVED] {save_path}")

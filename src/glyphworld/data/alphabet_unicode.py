@@ -1,6 +1,5 @@
 """
-This script stores the alphabets, the unicodes of the capital letters and the names of
-the associated font files.
+Alphabets of the dataset: Unicode code points and the associated font files.
 """
 
 from glyphworld.core.paths import DATA_DIR

@@ -1,3 +1,7 @@
+"""
+Compare glyph embeddings and script distances across font variants.
+"""
+
 from __future__ import annotations
 
 import pickle

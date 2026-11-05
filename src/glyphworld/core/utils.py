@@ -1,7 +1,10 @@
+"""
+Pickle helpers and glyph-level cosine distances.
+"""
+
 import numpy as np
 import pickle
 
-from glyphworld.core.paths import ALPHABETS_DIR
 
 
 def save_glyph_dictionary(glyph_dic, path_dic):

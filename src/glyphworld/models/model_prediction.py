@@ -146,7 +146,7 @@ if __name__ == "__main__":
             for i, k in enumerate(keys)
         }
 
-    save_name = f"alphabets_unicode_embeddings_css.pkl"
+    save_name = "alphabets_unicode_embeddings_css.pkl"
     save_path = ALPHABETS_DIR / save_name
 
     save_glyph_dictionary(embeddings_dic, save_path)

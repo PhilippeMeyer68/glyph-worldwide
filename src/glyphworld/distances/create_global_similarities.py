@@ -46,24 +46,23 @@ if __name__ == "__main__":
 
     alphabets = sorted([a for a in embeddings_dic.keys() if not a.endswith(" Full")])
     alphabets_short = [short_name_from_filename(a) for a in alphabets]
-    
-    if 1 == 0:
-        alphabet_distances = compute_alphabet_similarities_from_embeddings_dict(
-            embeddings_dic, alphabets
-        )
-    
-        print(
-            "Computed",
-            len(alphabet_distances),
-            "alphabet-pair similarities out of",
-            len(alphabets),
-            "alphabets.",
-        )
-        print("alphabets:", alphabets_short)
-    
-        out_path = PROCESSED_DIR / "global distances" / "alphabet_similarity_matrix_cosine.pkl"
-    
-        global_sim_dic = {"alphabets": alphabets, "alphabet_distances": alphabet_distances}
-        save_glyph_dictionary(global_sim_dic, out_path)
-    
-        print(f"Saved alphabet similarities to: {out_path}")
+
+    alphabet_distances = compute_alphabet_similarities_from_embeddings_dict(
+        embeddings_dic, alphabets
+    )
+
+    print(
+        "Computed",
+        len(alphabet_distances),
+        "alphabet-pair similarities out of",
+        len(alphabets),
+        "alphabets.",
+    )
+    print("alphabets:", alphabets_short)
+
+    out_path = PROCESSED_DIR / "global distances" / "alphabet_similarity_matrix_cosine.pkl"
+
+    global_sim_dic = {"alphabets": alphabets, "alphabet_distances": alphabet_distances}
+    save_glyph_dictionary(global_sim_dic, out_path)
+
+    print(f"Saved alphabet similarities to: {out_path}")

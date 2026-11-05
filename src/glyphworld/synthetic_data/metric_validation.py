@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 """
 Evaluate glyph-script distance metrics on a 3-tier synthetic validation dataset.
 
@@ -17,6 +15,8 @@ Use:
     python evaluate_synthetic_metric_dataset.py --metric-set light
     python evaluate_synthetic_metric_dataset.py --metric-set full
 """
+
+from __future__ import annotations
 
 import argparse
 from pathlib import Path
@@ -440,7 +440,7 @@ def compute_all_script_embeddings(
 
         if len(out) < 5:
             print(
-                f"[DEBUG] {script_id}: n_imgs={len(imgs)}, "
+                f"[INFO] {script_id}: n_imgs={len(imgs)}, "
                 f"emb_shape={z.shape}, emb_std={float(np.std(z)):.6f}"
             )
 
