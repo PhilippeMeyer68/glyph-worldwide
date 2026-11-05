@@ -1,9 +1,18 @@
-keras==2.15.0
-matplotlib==3.7.2
-numpy==1.23.5
-opencv_python==4.7.0.72
-Pillow==10.2.0
-scipy==1.12.0
-skimage==0.0
-tensorflow==2.15.0
-tensorflow_intel==2.15.0
+# Python 3.10 (tested with 3.10.19). Exact versions used to produce the paper.
+#
+# Pillow is pinned on purpose: glyph rendering goes through the FreeType build
+# bundled with Pillow, and Pillow 12 shifts glyph contours by a pixel compared
+# with 11.1, which changes the rendered dataset (and downstream numbers).
+Pillow==11.1.0
+numpy==1.26.4
+scipy==1.15.3
+pandas==2.3.3
+scikit-learn==1.7.2
+scikit-learn-extra==0.3.0
+scikit-image==0.25.2
+opencv-python==4.12.0.88
+matplotlib==3.10.8
+openpyxl==3.1.5
+geopy==2.4.1
+torch==2.7.1
+torchvision==0.22.1
