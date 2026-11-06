@@ -4,7 +4,7 @@ Sensitivity of the spatio-temporal correlation to the script metadata.
 
 Locations and time ranges are approximate, so the metadata are perturbed and
 the correlation between visual distance and a fixed geographic + temporal
-predictor (min geographic + temporal L2, the components of the best mixed
+predictor (min geographic + temporal L-infinity, the components of the best mixed
 model, without fitted parameters) is recomputed.
 
 Perturbations (repeated trials):
@@ -22,7 +22,7 @@ from scipy.stats import spearmanr
 
 from glyphworld.core.paths import RESULTS_DIR, INFO_DIR
 from glyphworld.analysis.correlation_location_similarity import (
-    compute_geo_min, compute_time_L2, _parse_float_list_cell,
+    compute_geo_min, compute_time_Linf, _parse_float_list_cell,
 )
 
 META = INFO_DIR / "scripts_location_with_latlon_and_timerange.xlsx"
@@ -67,7 +67,7 @@ def _load():
 
 def _combined_rho(df, pairs, vis) -> float:
     g = np.asarray(compute_geo_min(df, pairs), float)
-    t = np.asarray(compute_time_L2(df, pairs), float)
+    t = np.asarray(compute_time_Linf(df, pairs), float)
     m = np.isfinite(g) & np.isfinite(t) & np.isfinite(vis)
 
     def nz(x):
