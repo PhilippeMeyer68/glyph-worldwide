@@ -141,10 +141,10 @@ if __name__ == "__main__":
     xsize, ysize = 105, 105  # Size of the images.
     fontsize = 51  # Size of the glyphs in the images.
 
-    # Creation of the tofu image "unsupported" to test if the glyphs are well loaded
-    char = 1
-    font_arial = DATA_DIR / "raw" / "fonts" / "ArialUnicode.ttf"
-    image_unsupported = create_glyph(char, xsize, ysize, fontsize, font_arial)
+    # Reference "tofu" image used to detect unsupported glyphs. It is U+0001
+    # rendered with create_glyph from Arial Unicode MS, a proprietary font that
+    # cannot be redistributed, so the rendered image is shipped instead.
+    image_unsupported = np.load(DATA_DIR / "raw" / "unsupported_glyph.npy")
 
     # We give some statistics and we test an alphabet.
     print(

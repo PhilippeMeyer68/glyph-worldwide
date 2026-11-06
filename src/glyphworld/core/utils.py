@@ -4,10 +4,11 @@ Pickle helpers and glyph-level cosine distances.
 
 import numpy as np
 import pickle
-
+from pathlib import Path
 
 
 def save_glyph_dictionary(glyph_dic, path_dic):
+    Path(path_dic).parent.mkdir(parents=True, exist_ok=True)
     with open(path_dic, "wb") as f:
         pickle.dump(glyph_dic, f, protocol=pickle.HIGHEST_PROTOCOL)
 

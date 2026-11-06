@@ -68,6 +68,7 @@ def main() -> None:
                 rows.append({"curve": c, "k_min": a, "k_max": b,
                              "knee": knee(w["k"].to_numpy(float), w[c].to_numpy(float))})
     scan = pd.DataFrame(rows)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     scan.to_csv(OUTPUT_DIR / "knee_scan.csv", index=False)
 
     lo, hi = K_RANGE

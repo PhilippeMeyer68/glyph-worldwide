@@ -10,7 +10,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from glyphworld.core.paths import DATA_DIR, PROCESSED_DIR
+from glyphworld.core.paths import DATA_DIR, PROCESSED_DIR, ROOT
 from glyphworld.data.alphabet_unicode import alphabet_unicode_map
 from glyphworld.data.build_alphabet_data import create_glyph
 
@@ -209,7 +209,9 @@ if __name__ == "__main__":
         print(f"\n[BUILD] {script}")
 
         font_paths = get_font_paths_for_script(script)
-        data["font_paths"][script] = {k: str(v) for k, v in font_paths.items()}
+        data["font_paths"][script] = {
+            k: Path(v).relative_to(ROOT).as_posix() for k, v in font_paths.items()
+        }
         data["alphabets"][script] = {}
 
         for font_name, font_path in font_paths.items():
