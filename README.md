@@ -70,22 +70,34 @@ pip install -e .
 **Pillow is pinned to 11.1.0 on purpose.** Glyph rendering goes through the
 FreeType build bundled with Pillow; Pillow 12 shifts glyph contours by one
 pixel, which changes the rendered dataset and, slightly, every downstream
-number.
+number. The glyphs of the paper were rendered with the conda build of Pillow
+11.1.0 (`conda install pillow=11.1.0`); the pip wheel renders 5 of the 21,572
+glyphs (Phags-pa) a few pixels differently, which changes downstream numbers by
+less than 10⁻³. Starting from the processed data archived on Zenodo, all
+results are reproduced exactly.
 
 ## Data and models
 
 The fonts, the trained checkpoints, and the other input data are archived on
-Zenodo: **[DOI to be added]**. Download the archive and extract it at the root
-of the repository, so that the paths below exist.
+Zenodo: [10.5281/zenodo.24011343](https://doi.org/10.5281/zenodo.24011343).
+Download `glyph-worldwide-data.zip` and extract it at the root of the
+repository, so that the paths below exist.
 
 | Path | Content |
 |---|---|
 | `data/raw/fonts/`, `data/raw/alternative fonts/serif/` | Google Noto fonts (SIL Open Font License) |
 | `data/raw/TGSCC-Unicode.txt` | Table of General Standard Chinese Characters (CJK inventory) |
+| `data/raw/unsupported_glyph.npy` | Reference "tofu" image used to discard unsupported glyphs |
 | `data/info/` | Script metadata: locations, time ranges, genealogical family labels |
 | `data/baseline_distances/` | Script distances of the baseline encoders (companion project) |
-| `data/external/` | External glyph images (real images, held-out Omniglot alphabets), see `data/external/README.md` |
+| `data/external/omniglot/` | Held-out Omniglot alphabets (step 18) |
+| `data/processed/` | Rendered glyphs of the 125 scripts, their embeddings and the script distance matrix (output of steps 1–4 and 12) |
 | `models/css/` | Trained teacher and teacher–student checkpoints |
+
+Step 19 also needs four public third-party image datasets (Egyptian
+hieroglyph photographs, Oracle-MNIST, Devanagari handwriting, Kuzushiji-MNIST),
+which are not redistributed: `data/external/README.md` in the archive lists
+their sources and where to put them.
 
 ## Running the pipeline
 
