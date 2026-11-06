@@ -133,6 +133,10 @@ All steps are Python modules, run from the repository root with
 Steps 1–19 take about 25 minutes; steps 20 and 22 take about 2 hours each and
 can run in parallel.
 
+## License
+The code is released under the [MIT License](LICENSE). The data archived on
+Zenodo comes with its own licenses (see the archive's README).
+
 ## Authors
 * **Philippe Meyer** - *Université Paris-Saclay, INRAE, AgroParisTech, Micalis Institute, 78350 Jouy-en-Josas, France*. Email: philippe.meyer@inrae.fr
 * **Claire Roman** - *University of Haute Alsace, IRIMAS UR 7499, 68093 Mulhouse Cedex, France*. Email: claire.roman.91@gmail.com
