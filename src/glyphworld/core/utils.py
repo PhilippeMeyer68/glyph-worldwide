@@ -47,7 +47,7 @@ def dist_dict_from_embeddings_cosine(
     block_j: int = 512,
 ) -> dict[tuple[int, int], float]:
     """
-    Replaces old Siamese-head distance with cosine distance on normalized embeddings.
+    Cosine distances between two sets of L2-normalized embeddings.
     """
     Z1 = np.asarray(Z1, dtype=np.float32)
     Z2 = np.asarray(Z2, dtype=np.float32)

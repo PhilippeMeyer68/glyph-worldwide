@@ -24,7 +24,7 @@ def compute_alphabet_similarities_from_embeddings_dict(embeddings_dic, alphabets
     for i in range(len(alphabets) - 1):
         a1 = alphabets[i]
         Z1 = np.stack(list(embeddings_dic[a1].values()), axis=0).astype(np.float32, copy=False)
-        print("i", i, a1, Z1.shape)
+        print(f"[{i + 1}/{len(alphabets) - 1}] {a1}: {Z1.shape[0]} glyphs")
 
         for j in range(i + 1, len(alphabets)):
             a2 = alphabets[j]
@@ -41,8 +41,7 @@ if __name__ == "__main__":
     EMB_PKL_NAME = "alphabets_unicode_embeddings_css_kmedoids.pkl"
     load_path = ALPHABETS_DIR / EMB_PKL_NAME
     embeddings_dic = load_glyph_dictionary(load_path)
-    for alph in embeddings_dic:
-        print(alph, len(embeddings_dic[alph]))
+    print(f"[LOAD] {load_path} ({len(embeddings_dic)} entries)")
 
     alphabets = sorted([a for a in embeddings_dic.keys() if not a.endswith(" Full")])
     alphabets_short = [short_name_from_filename(a) for a in alphabets]

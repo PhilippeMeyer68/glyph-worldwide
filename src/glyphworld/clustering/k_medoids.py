@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Batch-free k-medoids on glyph embeddings using cosine distance.
-
-Autonomous glyphworld version:
-- no TensorFlow
-- no glyphssl
-- no Siamese head
 """
 
 from __future__ import annotations

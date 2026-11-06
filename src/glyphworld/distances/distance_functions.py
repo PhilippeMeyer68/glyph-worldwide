@@ -47,7 +47,7 @@ def similarity_between_languages_2(dict_dist_loc):
 
 def similarity_between_languages(dict_dist_loc):
     """
-    Computes the siamese-based distance between X_glyph_1 and X_glyph_2.
+    Computes the symmetric nearest-neighbor distance between X_glyph_1 and X_glyph_2.
     Corresponds to d(X_glyph_1, X_glyph_2) in the paper.
     """
     sim_1 = similarity_between_languages_1(dict_dist_loc)

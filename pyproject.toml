@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "glyphworld"
 version = "0.1.0"
+description = "A quantitative visual taxonomy of worldwide writing systems"
+requires-python = ">=3.10"
 dependencies = []
 
 [tool.setuptools]

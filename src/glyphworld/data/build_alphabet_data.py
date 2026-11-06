@@ -71,7 +71,6 @@ def create_glyph(char_code, xsize, ysize, initial_fontsize, font_path, letter_wi
     
     width = x_nonwhite[-1] - x_nonwhite[0] + 1
     height = y_nonwhite[-1] - y_nonwhite[0] + 1
-    #print(letter, width, height)
     x_offset = (xsize - width) // 2 - x_nonwhite[0]
     y_offset = (ysize - height) // 2 - y_nonwhite[0]
     font = ImageFont.truetype(font_path, fontsize)
@@ -117,7 +116,6 @@ def create_alphabet(
             print(tmp)
         char = i
         image = create_glyph(char, xsize, ysize, fontsize, font)
-        #plot_a_glyph(image)
 
         difference = cv2.subtract(image, image_unsupported)
         if not np.any(difference) == False:

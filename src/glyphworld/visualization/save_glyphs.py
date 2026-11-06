@@ -19,11 +19,8 @@ from glyphworld.core.utils import load_glyph_dictionary
 # User parameters
 # ============================================================
 
-#SELECTED_SCRIPT = "Cypriot Syllabary"
-# SELECTED_SCRIPT = "Linear A Full"
+# Any script name of the dataset, e.g. "Latin", "Greek", "Linear A Full".
 SELECTED_SCRIPT = "Linear B Full"
-# SELECTED_SCRIPT = "Latin"
-# SELECTED_SCRIPT = "Greek"
 
 N_COLS = 10
 DPI = 300
