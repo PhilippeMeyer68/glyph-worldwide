@@ -1,20 +1,60 @@
 # A Quantitative Visual Taxonomy of Worldwide Writing Systems
 
-Code for the NeurIPS 2026 paper *A Quantitative Visual Taxonomy of Worldwide
-Writing Systems* (Philippe Meyer, Claire Roman).
+<p align="center">
+  <img src="images/glyphs.png" width=100% title="glyph-examples">
+</p>
 
-The pipeline renders the glyphs of 125 historically attested Unicode scripts,
-embeds them with a frozen teacher–student encoder, aggregates glyph distances
-into script-level distances, selects the script metric and the clustering
-method on synthetic benchmarks, and builds a worldwide visual taxonomy. It also
-contains the validation experiments of the paper: font sensitivity, k-medoids
-sensitivity, recovery of expert script families, real non-Noto glyph images,
-robustness to the synthetic generator, and the spatio-temporal analysis.
+## About
+This repository includes the code associated with the paper **A Quantitative
+Visual Taxonomy of Worldwide Writing Systems**, accepted at the
+[40th Conference on Neural Information Processing Systems (NeurIPS 2026)](https://neurips.cc/Conferences/2026).
+
+Here is the abstract of the article:
+*Quantitatively comparing writing systems at a worldwide scale is challenging because visual similarity must be inferred without relying on predefined linguistic or genealogical assumptions, and only limited ground-truth taxonomy is available for validation. We introduce a fully data-driven framework for comparing scripts based on learned glyph representations. Using a teacher–student model, we obtain deformation-invariant glyph embeddings and aggregate them into script-level distances. To enable principled model selection in the absence of labels, we construct synthetic script datasets that simulate key aspects of script evolution, including partial inheritance, visual distortion, and inventory variation. These benchmarks are used to independently select both the script-level distance metric and the clustering method, showing that nearest-neighbor aggregation and Ward hierarchical clustering best recover controlled relatedness structure. Applying the validated pipeline to 125 historically attested writing systems yields a global visual taxonomy that recovers coherent typological families, in quantitative agreement with expert genealogical classifications, while also revealing visually driven associations beyond strict genealogy. The resulting structure is stable under controlled perturbations, transfers to handwritten and photographed glyphs beyond the digital fonts used to build it, and shows a moderate correlation with independent geographic and temporal metadata, indicating that learned representations capture non-trivial traces of historical transmission. Beyond large-scale comparison, this approach provides a quantitative tool for exploring relationships between writing systems and has potential applications in historical analysis and the decipherment of ancient scripts by identifying visually related alphabets.*
 
 The glyph encoder is trained in the companion project
 [*Contrastive-to-Self-Supervised: A Two-Stage Framework for Script Similarity
 Learning*](https://arxiv.org/abs/2603.06180); this repository only uses the
-trained checkpoints.
+trained checkpoints. An earlier study on 51 alphabets with Siamese neural
+networks is available at [glyph-SNN](https://github.com/PhilippeMeyer68/glyph-SNN).
+
+<table>
+  <tr>
+    <!-- Left Column -->
+    <td style="vertical-align: top; width: 55%;">
+      <div style="text-align: center;">
+        <img src="images/radial_dendrogram.png" alt="radial-dendrogram" style="width: 100%;"/>
+        <p style="font-size: 12px;"><strong>Figure:</strong> Visual taxonomy of 125 historically attested scripts, obtained by Ward-linkage hierarchical clustering of the learned script-level distances. Colors show the partition into 34 clusters.</p>
+      </div>
+    </td>
+    <!-- Right Column -->
+    <td style="vertical-align: top; width: 45%;">
+      <div style="margin-bottom: 10px; text-align: center;">
+        <img src="images/real_and_synthetic_glyphs.png" alt="real-and-synthetic-scripts" style="width: 100%;"/>
+        <p style="font-size: 12px;"><strong>Figure:</strong> Real scripts from the Unicode dataset (left) and synthetic script pairs with controlled relatedness used to select the metric and the clustering method (right).</p>
+      </div>
+      <div style="text-align: center;">
+        <img src="images/mds_2d.png" alt="MDS-scripts" style="width: 100%;"/>
+        <p style="font-size: 12px;"><strong>Figure:</strong> Two-dimensional scaling of the script-distance matrix. Colors correspond to the 34 clusters.</p>
+      </div>
+    </td>
+  </tr>
+</table>
+
+## Citation
+Philippe Meyer and Claire Roman. 2026. A Quantitative Visual Taxonomy of
+Worldwide Writing Systems. In *Advances in Neural Information Processing
+Systems (NeurIPS 2026)*.
+
+or in bibtex:
+```bibtex
+@inproceedings{meyer2026worldwide,
+  title     = {A Quantitative Visual Taxonomy of Worldwide Writing Systems},
+  author    = {Meyer, Philippe and Roman, Claire},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026}
+}
+```
 
 ## Installation
 
@@ -81,14 +121,6 @@ All steps are Python modules, run from the repository root with
 Steps 1–19 take about 25 minutes; steps 20 and 22 take about 2 hours each and
 can run in parallel.
 
-
-## Citation
-
-```bibtex
-@inproceedings{meyer2026worldwide,
-  title     = {A Quantitative Visual Taxonomy of Worldwide Writing Systems},
-  author    = {Meyer, Philippe and Roman, Claire},
-  booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2026}
-}
-```
+## Authors
+* **Philippe Meyer** - *Université Paris-Saclay, INRAE, AgroParisTech, Micalis Institute, 78350 Jouy-en-Josas, France*. Email: philippe.meyer@inrae.fr
+* **Claire Roman** - *University of Haute Alsace, IRIMAS UR 7499, 68093 Mulhouse Cedex, France*. Email: claire.roman.91@gmail.com
