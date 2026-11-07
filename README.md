@@ -1,5 +1,8 @@
 # A Quantitative Visual Taxonomy of Worldwide Writing Systems
 
+[![Code DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24033722.svg)](https://doi.org/10.5281/zenodo.24033722)
+[![Data DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24011343.svg)](https://doi.org/10.5281/zenodo.24011343)
+
 <p align="center">
   <img src="images/glyphs.png" width=100% title="glyph-examples">
 </p>

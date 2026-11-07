@@ -12,6 +12,7 @@ authors:
 repository-code: "https://github.com/PhilippeMeyer68/glyph-worldwide"
 license: MIT
 version: 1.0.0
+doi: 10.5281/zenodo.24033722
 preferred-citation:
   type: conference-paper
   title: "A Quantitative Visual Taxonomy of Worldwide Writing Systems"
