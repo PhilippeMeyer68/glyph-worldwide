@@ -40,6 +40,9 @@ from pathlib import Path
 from typing import Any
 
 import matplotlib.pyplot as plt
+
+# Embed TrueType instead of Type 3 fonts in PDF figures (conference requirement).
+plt.rcParams["pdf.fonttype"] = 42
 import numpy as np
 import pandas as pd
 from adjustText import adjust_text
