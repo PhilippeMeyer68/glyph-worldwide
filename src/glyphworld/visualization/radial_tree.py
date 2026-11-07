@@ -127,7 +127,7 @@ def draw_text_labels(ax: Axes, coords: np.ndarray, labels: Sequence[str], fontsi
         ax.text(
             float(x),
             float(y),
-            label,
+            label.replace("`", "’"),
             va="center",
             ha=ha,
             rotation=rot,

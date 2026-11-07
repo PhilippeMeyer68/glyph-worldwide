@@ -95,6 +95,11 @@ def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
 
+def display_name(name: str) -> str:
+    """Script name as shown in figures (Ge`ez -> Ge’ez)."""
+    return name.replace("`", "’")
+
+
 def to_jsonable(obj: Any) -> Any:
     if isinstance(obj, Path):
         return str(obj)
@@ -183,6 +188,7 @@ def plot_rectangular_dendrogram(
         orientation="right",
     )
 
+    ax.set_yticklabels([display_name(t.get_text()) for t in ax.get_yticklabels()])
     ax.tick_params(axis="y", which="major", labelsize=10)
     ax.tick_params(axis="x", which="major", labelsize=8)
     ax.set_xlabel("Ward distance")
@@ -615,7 +621,7 @@ def plot_mds_2d(
 
     for _, row in mds_df.iterrows():
         ax.annotate(
-            row["Script"],
+            display_name(row["Script"]),
             xy=(row["MDS1"], row["MDS2"]),
             xytext=(3, 3),
             textcoords="offset points",
