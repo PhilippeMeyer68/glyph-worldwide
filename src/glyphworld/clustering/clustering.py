@@ -42,6 +42,7 @@ from typing import Any
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from adjustText import adjust_text
 
 from scipy.cluster.hierarchy import (
     dendrogram,
@@ -85,6 +86,7 @@ FIG_DPI = 300
 MDS_RANDOM_STATE = 42
 MDS_MAX_ITER = 3000
 MDS_EPS = 1e-9
+MDS_LABEL_ITER = 1000  # fixed iteration count keeps the label layout deterministic
 
 
 # =====================================================================
@@ -606,34 +608,52 @@ def plot_mds_2d(
     save_path: Path,
     show: bool = False,
 ) -> None:
-    fig, ax = plt.subplots(figsize=(12, 10))
+    x = mds_df["MDS1"].to_numpy()
+    y = mds_df["MDS2"].to_numpy()
+
+    # layout="none": the global autolayout set for the dendrogram would
+    # otherwise resize the axes while the labels are being placed.
+    fig, ax = plt.subplots(figsize=(13, 8), layout="none")
+    # Equal scale on both axes, with limits fitted to the points.
+    ax.set_aspect("equal", adjustable="box")
+    ax.set_xlim(x.min() - 0.03, x.max() + 0.06)
+    ax.set_ylim(y.min() - 0.02, y.max() + 0.02)
 
     scatter = ax.scatter(
-        mds_df["MDS1"],
-        mds_df["MDS2"],
+        x,
+        y,
         c=mds_df["Cluster"],
         cmap="tab20",
-        s=70,
+        s=28,
         alpha=0.85,
         edgecolors="black",
         linewidths=0.3,
+        zorder=3,
     )
 
-    for _, row in mds_df.iterrows():
-        ax.annotate(
-            display_name(row["Script"]),
-            xy=(row["MDS1"], row["MDS2"]),
-            xytext=(3, 3),
-            textcoords="offset points",
-            fontsize=7,
-            alpha=0.9,
-        )
+    texts = [
+        ax.text(xi, yi, display_name(name), fontsize=5.5, zorder=4)
+        for xi, yi, name in zip(x, y, mds_df["Script"])
+    ]
+    # Move labels apart to avoid overlaps; a thin line links each moved label
+    # to its point.
+    adjust_text(
+        texts,
+        x=x,
+        y=y,
+        ax=ax,
+        expand=(1.15, 1.3),
+        force_text=(0.3, 0.5),
+        force_static=(0.2, 0.4),
+        arrowprops=dict(arrowstyle="-", color="0.5", lw=0.4, shrinkA=0, shrinkB=2),
+        max_move=None,
+        iter_lim=MDS_LABEL_ITER,
+    )
 
     ax.set_xlabel("MDS dimension 1")
     ax.set_ylabel("MDS dimension 2")
     ax.set_title("2D MDS projection of script distances")
     ax.grid(True, alpha=0.25)
-    ax.set_aspect("equal", adjustable="datalim")
 
     cbar = fig.colorbar(scatter, ax=ax, shrink=0.75)
     cbar.set_label("Cluster")
