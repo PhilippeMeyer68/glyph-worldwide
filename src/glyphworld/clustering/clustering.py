@@ -616,7 +616,7 @@ def plot_mds_2d(
     fig, ax = plt.subplots(figsize=(13, 8), layout="none")
     # Equal scale on both axes, with limits fitted to the points.
     ax.set_aspect("equal", adjustable="box")
-    ax.set_xlim(x.min() - 0.03, x.max() + 0.06)
+    ax.set_xlim(x.min() - 0.03, x.max() + 0.10)
     ax.set_ylim(y.min() - 0.02, y.max() + 0.02)
 
     scatter = ax.scatter(
