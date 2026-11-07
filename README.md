@@ -139,4 +139,4 @@ Zenodo comes with its own licenses (see the archive's README).
 
 ## Authors
 * **Philippe Meyer** - *Université Paris-Saclay, INRAE, AgroParisTech, Micalis Institute, 78350 Jouy-en-Josas, France*. Email: philippe.meyer@inrae.fr
-* **Claire Roman** - *University of Haute Alsace, IRIMAS UR 7499, 68093 Mulhouse Cedex, France*. Email: claire.roman.91@gmail.com
+* **Claire Roman** - *University of Haute Alsace, IRIMAS UR 7499, F-68100 Mulhouse, France*. Email: claire.roman@uha.fr

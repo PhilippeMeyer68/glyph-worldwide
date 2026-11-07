@@ -8,7 +8,7 @@ authors:
     affiliation: "Université Paris-Saclay, INRAE, AgroParisTech, Micalis Institute"
   - family-names: Roman
     given-names: Claire
-    affiliation: "Université de Haute-Alsace, IRIMAS UR 7499"
+    affiliation: "University of Haute Alsace, IRIMAS UR 7499"
 repository-code: "https://github.com/PhilippeMeyer68/glyph-worldwide"
 license: MIT
 version: 1.0.0
