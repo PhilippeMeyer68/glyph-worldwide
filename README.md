@@ -10,7 +10,7 @@ Visual Taxonomy of Worldwide Writing Systems**, accepted at the
 [40th Conference on Neural Information Processing Systems (NeurIPS 2026)](https://neurips.cc/Conferences/2026).
 
 Here is the abstract of the article:
-*Quantitatively comparing writing systems at a worldwide scale is challenging because visual similarity must be inferred without relying on predefined linguistic or genealogical assumptions, and only limited ground-truth taxonomy is available for validation. We introduce a fully data-driven framework for comparing scripts based on learned glyph representations. Using a teacher–student model, we obtain deformation-invariant glyph embeddings and aggregate them into script-level distances. To enable principled model selection in the absence of labels, we construct synthetic script datasets that simulate key aspects of script evolution, including partial inheritance, visual distortion, and inventory variation. These benchmarks are used to independently select both the script-level distance metric and the clustering method, showing that nearest-neighbor aggregation and Ward hierarchical clustering best recover controlled relatedness structure. Applying the validated pipeline to 125 historically attested writing systems yields a global visual taxonomy that recovers coherent typological families, in quantitative agreement with expert genealogical classifications, while also revealing visually driven associations beyond strict genealogy. The resulting structure is stable under controlled perturbations, transfers to handwritten and photographed glyphs although it was built from digital fonts, and shows a moderate correlation with independent geographic and temporal metadata, indicating that learned representations capture non-trivial traces of historical transmission. More broadly, this approach provides a quantitative tool for exploring relationships between writing systems and has potential applications in historical analysis and the decipherment of ancient scripts by identifying visually related alphabets.*
+*Quantitatively comparing writing systems at a worldwide scale is challenging because visual similarity must be inferred without relying on predefined linguistic or genealogical assumptions, and only limited ground-truth taxonomy is available for validation. We introduce a fully data-driven framework for comparing scripts based on learned glyph representations. Using a teacher–student model, we obtain deformation-invariant glyph embeddings and aggregate them into script-level distances. To enable principled model selection in the absence of labels, we construct synthetic script datasets that simulate key aspects of script evolution, including partial inheritance, visual distortion, and inventory variation. These benchmarks are used to independently select both the script-level distance metric and the clustering method, showing that nearest-neighbor aggregation and Ward hierarchical clustering best recover controlled relatedness structure. Applying the validated pipeline to 125 historically attested writing systems yields a global visual taxonomy that recovers coherent typological families, in quantitative agreement with expert genealogical classifications, while also revealing visually driven associations beyond strict genealogy. The resulting structure is stable under controlled perturbations, transfers to handwritten and photographed glyphs despite being built from digital-font renderings, and shows a moderate correlation with independent geographic and temporal metadata, indicating that learned representations capture non-trivial traces of historical transmission. More broadly, this approach provides a quantitative tool for exploring relationships between writing systems and has potential applications in historical analysis and the decipherment of ancient scripts by identifying visually related alphabets.*
 
 The glyph encoder is trained in the companion project
 [*Contrastive-to-Self-Supervised: A Two-Stage Framework for Script Similarity
@@ -18,28 +18,28 @@ Learning*](https://arxiv.org/abs/2603.06180); this repository only uses the
 trained checkpoints. An earlier study on 51 alphabets with Siamese neural
 networks is available at [glyph-SNN](https://github.com/PhilippeMeyer68/glyph-SNN).
 
-<table>
-  <tr>
-    <!-- Left Column -->
-    <td style="vertical-align: top; width: 55%;">
-      <div style="text-align: center;">
-        <img src="images/radial_dendrogram.png" alt="radial-dendrogram" style="width: 100%;"/>
-        <p style="font-size: 12px;"><strong>Figure:</strong> Visual taxonomy of 125 historically attested scripts, obtained by Ward-linkage hierarchical clustering of the learned script-level distances. Colors show the partition into 34 clusters.</p>
-      </div>
-    </td>
-    <!-- Right Column -->
-    <td style="vertical-align: top; width: 45%;">
-      <div style="margin-bottom: 10px; text-align: center;">
-        <img src="images/real_and_synthetic_glyphs.png" alt="real-and-synthetic-scripts" style="width: 100%;"/>
-        <p style="font-size: 12px;"><strong>Figure:</strong> Real scripts from the Unicode dataset (left) and synthetic script pairs with controlled relatedness used to select the metric and the clustering method (right).</p>
-      </div>
-      <div style="text-align: center;">
-        <img src="images/mds_2d.png" alt="MDS-scripts" style="width: 100%;"/>
-        <p style="font-size: 12px;"><strong>Figure:</strong> Two-dimensional scaling of the script-distance matrix. Colors correspond to the 34 clusters.</p>
-      </div>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="images/radial_dendrogram.png" alt="radial-dendrogram" width="80%">
+</p>
+
+**Figure:** Visual taxonomy of 125 historically attested scripts, obtained by
+Ward-linkage hierarchical clustering of the learned script-level distances.
+Colors show the partition into 34 clusters.
+
+<p align="center">
+  <img src="images/real_and_synthetic_glyphs.png" alt="real-and-synthetic-scripts" width="100%">
+</p>
+
+**Figure:** Real scripts from the Unicode dataset (left) and synthetic script
+pairs with controlled relatedness used to select the metric and the clustering
+method (right).
+
+<p align="center">
+  <img src="images/mds_2d.png" alt="MDS-scripts" width="100%">
+</p>
+
+**Figure:** Two-dimensional scaling of the script-distance matrix. Colors
+correspond to the 34 clusters.
 
 ## Citation
 Philippe Meyer and Claire Roman. 2026. A Quantitative Visual Taxonomy of
